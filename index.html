@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <title>介绍页面</title>
+    <link rel="stylesheet" href="top-bar.css">
+    <script src="top-bar.js" defer></script>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background-color: #f5f5f7;
+        }
+        .video-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: 1;
+        }
+        .video-background1 {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 120%;
+            object-fit: cover;
+            z-index: 1;
+        }
+        .video-background2 {
+            position: fixed;
+            top: -10px;
+            left: 0;
+            width: 100%;
+            height: 113%;
+            object-fit: cover;
+            z-index: 1;
+        }
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.2);
+            z-index: 0;
+        }
+        .logo {
+            position: fixed;
+            top: 10px;
+            left: 10px;
+            z-index: 23;
+        }
+        .logo img {
+            width: 100px; /* 调整图标大小 */
+            height: auto;
+        }
+        .nav-buttons {
+            position: absolute;
+            top: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 10px;
+            z-index: 2;
+        }
+        .nav-button {
+            background-color: transparent;
+            color: black;
+            border: 1px solid transparent;
+            padding: 10px 20px;
+            font-size: 1em;
+            cursor: pointer;
+            border-radius: 25px;
+            transition: background-color 0.3s ease, color 0.3s ease, border 0.3s ease;
+            width:100%;
+        }
+        .nav-button:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+            border: 1px solid white;
+        }
+        .content {
+            position: relative;
+            z-index: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+            color: #333;
+            text-align: center;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+        h1 {
+            font-size: 2.5em;
+            margin-top: 20px;
+            color: #fff;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7), 0 0 10px rgba(255, 255, 255, 0.5);
+            transform: perspective(500px) rotateX(10deg);
+            transition: transform 0.3s ease;
+        }
+        h1:hover {
+            transform: perspective(500px) rotateX(0deg);
+        }
+        .to-llm {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 60px;
+            height: 60px;
+            background-color: #ffffff;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+            z-index: 1000;
+        }
+        .to-llm-text {
+            color: black;
+            font-size: 0.8em;
+            text-align: center;
+            line-height: 60px;
+        }
+    </style>
+</head>
+<body>
+    <div class="top-bar">
+        <div class="nav-buttons">
+            <div>
+                <button class="nav-button" onclick="window.location.href='intro.html'" onmouseover="expandTopBar(this)">首页</button>
+                <div class="sub-menu">
+                    <a href="intro.html#main3">团队介绍</a>
+                    <a href="intro.html#mainContent">开发团队介绍</a>
+                </div>
+            </div>
+            <div>
+                <button class="nav-button" onclick="window.location.href='health_monitor.html'" onmouseover="expandTopBar(this)">采集与监控</button>
+                <div class="sub-menu">
+                    <a href="health_monitor.html">子菜单1</a>
+                    <a href="health_monitor.html">子菜单2</a>
+                </div>
+            </div>
+            
+            <div>
+                <button class="nav-button" onclick="window.location.href='federal_learning.html'" onmouseover="expandTopBar(this)">联邦学习</button>
+                <div class="sub-menu">
+                    <a href="production_scheduling.html">子菜单1</a>
+                    <a href="production_scheduling.html">子菜单2</a>
+                </div>
+            </div>
+            <div>
+                <button class="nav-button" onclick="window.location.href='quality_control_defect_prediction.html'" onmouseover="expandTopBar(this)">双向金融</button>
+                <div class="sub-menu">
+                    <a href="quality_control_defect_prediction.html">子菜单1</a>
+                    <a href="quality_control_defect_prediction.html">子菜单2</a>
+                </div>
+            </div>
+            <div>
+                <button class="nav-button" onclick="window.location.href='maintenance_optimization.html'" onmouseover="expandTopBar(this)">可视化</button>
+                <div class="sub-menu">
+                    <a href="maintenance_optimization.html">子菜单1</a>
+                    <a href="maintenance_optimization.html">子菜单2</a>
+                </div>
+            </div>
+            <div>
+                <button class="nav-button" onclick="window.location.href='privacy_security_management.html'" onmouseover="expandTopBar(this)">数据安全</button>
+                <div class="sub-menu">
+                    <a href="privacy_security_management.html">子菜单1</a>
+                    <a href="privacy_security_management.html">子菜单2</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <video class="video-background" id="video1" autoplay muted>
+        <source src="figures/14.mp4" type="video/mp4">
+        您的浏览器不支持视频标签。
+    </video>
+    <video class="video-background2" id="video2" muted style="display: none;">
+        <source src="figures/15.mp4" type="video/mp4">
+        您的浏览器不支持视频标签。
+    </video>
+    <video class="video-background1" id="video3" muted style="display: none;">
+        <source src="figures/12.mp4" type="video/mp4">
+        您的浏览器不支持视频标签。
+    </video>
+    <div class="overlay"></div>
+    <div class="logo">
+        <img src="figures/7.png" alt="Logo">
+    </div>
+    <div class="content">
+        <h1>欢迎使用联邦学习跨企业资产监控评估系统</h1>
+        <p class="subtitle">Welcome To The Federated Learning Assets Monitoring And Evaluation System</p>
+    </div>
+    <div class="to-llm" onclick="window.location.href='LLM.html'">
+        <span class="to-llm-text">智能管家</span>
+    </div>
+    <script>
+        const videos = [
+            document.getElementById('video1'),
+            document.getElementById('video2'),
+            document.getElementById('video3'),
+        ];
+
+        let currentVideoIndex = 0;
+
+        videos.forEach((video, index) => {
+            video.addEventListener('ended', () => {
+                video.style.display = 'none';
+                currentVideoIndex = (index + 1) % videos.length;
+                videos[currentVideoIndex].style.display = 'block';
+                videos[currentVideoIndex].play();
+            });
+        });
+    </script>    
+</body>
+</html> 

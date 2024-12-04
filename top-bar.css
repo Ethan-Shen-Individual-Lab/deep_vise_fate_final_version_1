@@ -1,0 +1,124 @@
+.subtitle {
+    font-size: 1.2em;
+    margin-top: 10px;
+    color: #e0e0e0;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5), 0 0 5px rgba(255, 255, 255, 0.3);
+    transform: perspective(500px) rotateX(5deg);
+    z-index: 5;
+}
+.top-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 60px;
+    width: 100%;
+    background-color: rgba(255, 255, 255, 0.9);
+    z-index: 23;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: height 0.2s ease, background-color 0.2s ease;
+}
+.top-bar.expanded {
+    height: 170px;
+    background-color: rgba(255, 255, 255, 0.8);
+}
+.sub-menu {
+    display: block;
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    top: 30px;
+    max-width:max-content ;
+    background-color: transparent;
+    box-shadow: none;
+    z-index: 24;
+    padding: 10px;
+    border-radius: 5px;
+    color: rgb(0, 0, 0);
+    transition: max-height 0.2s ease, opacity 0.2s ease;
+    position: fixed;
+    margin-left:11px;
+}
+.sub-menu.show {
+    max-height: 200px;
+    opacity: 1;
+}
+
+.sub-menu a {
+    color: rgb(0, 0, 0);
+    text-decoration: none;
+    display: block;
+    padding: 5px 0;
+}
+
+.sub-menu a:hover {
+    text-decoration: underline;
+}
+
+.sub-menu a::before {
+    content: "-";  /* 在文字前加一个· */
+    color: rgb(0, 0, 0);  /* 设置符号颜色 */
+    display: inline;  /* 确保符号和文字在同一行 */
+    margin-right: 5px;  /* 确保符号和文本之间有一些间隔 */
+}
+.nav-button {
+    background-color: transparent;
+    color: black;
+    border: 1px solid transparent;
+    padding: 10px 20px;
+    font-size: 1em;
+    cursor: pointer;
+    border-radius: 25px;
+    transition: background-color 0.3s ease, color 0.3s ease, border 0.3s ease;
+}
+.nav-button:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+    border: 1px solid white;
+}
+.blur-layer {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.2);
+    filter: blur(4px);
+    z-index: 20;
+    pointer-events: none;
+    opacity: 1;
+    transition: opacity 0.2s ease;
+}
+
+.some-class {
+    color: black;
+}
+.to-llm {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 60px;
+    height: 60px;
+    background-color: #ffffff;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    box-shadow: 0 2px 5px rgba(255, 255, 255, 0.3);
+    z-index: 1000;
+    border: 2px solid rgba(128, 128, 128, 0.5);
+}
+
+.to-llm img {
+    width: 40px;
+    height: 40px;
+    position: fixed;
+}
+
+.to-llm-text {
+    color: rgb(0, 0, 0);
+    font-size: 0.8em;
+    text-align: center;
+    line-height: 60px;
+}

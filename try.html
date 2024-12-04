@@ -1,0 +1,186 @@
+
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <title>设备健康监控与贷款调整</title>
+    <link rel="stylesheet" href="top-bar.css">
+    <script src="top-bar.js" defer></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f0f2f5;
+            color: #333;
+        }
+        .title {
+            font-size: 36px;
+            font-weight: bold;
+            color: #000000;
+            text-align: center;
+            margin-top: -50px;
+            margin-bottom: 20px;
+            font-family: 'Arial', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            border-bottom: 3px solid #8f3487;
+            padding-bottom: 10px;
+        }
+        .nav-buttons {
+            position: absolute;
+            top: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 10px;
+            z-index: 3;
+        }
+        .nav-button {
+            background-color: transparent;
+            color: rgb(0, 0, 0);
+            border: none;
+            padding: 10px 20px;
+            font-size: 1em;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        .nav-button:hover {
+            background-color: rgba(255, 255, 255, 0.65);
+        }
+        .nav-button-special {
+            background-color: rgba(255, 255, 255, 0.65);
+            color: rgb(0, 0, 0);
+            border: none;
+            padding: 10px 20px;
+            font-size: 1em;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        main {
+            margin: 0 auto;
+            padding: 60px 40px 20px 40px;
+            flex-grow: 1;
+            background-color: transparent;
+            width: 100%;
+            box-sizing: border-box;
+            z-index: 2;
+            position: relative;
+        }
+        a.return-link {
+            position: fixed;
+            top: 10px;
+            left: 10px;
+            color: white;
+            font-size: 0.8em;
+            text-decoration: none;
+            z-index: 24;
+            background-color: rgba(0, 0, 0, 0.5);
+            padding: 5px 10px;
+            border-radius: 5px;
+        }
+        .panel {
+            background-color: white;
+            padding: 20px;
+            margin: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        .top-left, .top-right, .bottom-left, .bottom-right {
+            background: #ffffff;
+            margin-bottom: 20px;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.1);
+        }
+        .panel h2, .panel h3, .panel p {
+            color: #000000;
+            margin-bottom: 15px;
+            font-size: 1.2em;
+        }
+        .panel h3 {
+            color: #9B6DFF;
+            margin: 10px 0;
+            font-size: 1.2em;
+        }
+        .panel p {
+            color: #000000;
+            line-height: 1.6;
+        }
+        .chart {
+            background-color: rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
+            padding: 15px;
+            margin-top: 15px;
+        }
+        #line-chart-container {
+            margin-top: 20px;
+        }
+        .curve-effect {
+            position: absolute;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.2), transparent 10%);
+            border-radius: 50%;
+            top: -50%;
+            left: -50%;
+            pointer-events: none;
+            animation: moveCurve 10s infinite linear;
+        }
+        @keyframes moveCurve {
+            0% { transform: translate(0, 0); }
+            50% { transform: translate(10%, 10%); }
+            100% { transform: translate(0, 0); }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="title">设备健康监控与贷款调整</div>
+
+    <div class="nav-buttons">
+        <button class="nav-button">返回首页</button>
+        <button class="nav-button-special">设置</button>
+    </div>
+
+    <main>
+        <a href="#" class="return-link">返回</a>
+        <div class="panel">
+            <h2>设备健康状态</h2>
+            <p>监控设备的实时健康状态，确保及时发现潜在问题，避免设备故障对生产造成影响。</p>
+            <div class="top-left">
+                <h3>设备1状态</h3>
+                <p>温度：75°C | 震动：正常 | 使用小时：1500h</p>
+                <div class="chart">
+                    <div id="line-chart-container">[设备状态图表]</div>
+                </div>
+            </div>
+
+            <div class="top-right">
+                <h3>设备2状态</h3>
+                <p>温度：80°C | 震动：异常 | 使用小时：1300h</p>
+                <div class="chart">
+                    <div id="line-chart-container">[设备状态图表]</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="panel">
+            <h2>贷款调整</h2>
+            <p>根据设备健康状态，实时调整贷款额度和利率。</p>
+            <div class="bottom-left">
+                <h3>当前贷款额度</h3>
+                <p>当前额度：500万 | 利率：3.5%</p>
+            </div>
+
+            <div class="bottom-right">
+                <h3>贷款调整建议</h3>
+                <p>设备2状态异常，建议降低贷款额度并提高利率。</p>
+            </div>
+        </div>
+    </main>
+
+    <div class="curve-effect"></div>
+
+</body>
+</html>

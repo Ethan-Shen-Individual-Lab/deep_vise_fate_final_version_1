@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LLM Chat</title>
+    <link rel="stylesheet" href="styles.css"> <!-- 引入样式 -->
+    <style>
+        /* 简单的样式设计 */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+        #chat-container {
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding: 10px;
+            background-color: #fff;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        
+        h1 {
+            text-align: center;
+        }
+        a.return-link {
+            position: fixed;
+            top: 10px;
+            left: 10px;
+            color: white;
+            font-size: 0.8em;
+            text-decoration: none;
+            z-index: 24;
+            background-color: rgba(0, 0, 0, 0.5);
+            padding: 5px 10px;
+            border-radius: 5px;
+        }
+        .logo {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            z-index: 24;
+        }
+        .logo img {
+            width: 100px; /* 调整图标大小 */
+            height: auto;
+        }
+    </style>
+<div class="logo">
+    <img src="figures/7.png" alt="Logo">
+</div>
+</head>
+<a href="index.html" class="return-link">返回</a>
+<body>
+    <h1>点击右下角使用智能管家</h1>
+    <div id="chat-container"></div> <!-- 聊天容器 -->
+
+    <script src="https://lf-cdn.coze.cn/obj/unpkg/flow-platform/chat-app-sdk/1.0.0-beta.4/libs/cn/index.js"></script>
+    <script>
+        new CozeWebSDK.WebChatClient({
+          config: {
+            bot_id: '7440138179946283035',
+          },
+          componentProps: {
+            title: 'Coze',
+            container: document.getElementById('chat-container'), // 指定聊天容器
+          },
+        });
+    </script>
+</body>
+</html>
