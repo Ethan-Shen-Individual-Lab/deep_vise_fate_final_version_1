@@ -173,11 +173,42 @@
             color: #333;
             font-size: 14px;
         }
+        .status-label1 {
+            color: #333;
+            font-size: 14px;
+            word-wrap: break-word;  /* 确保长单词会换行 */
+            white-space: normal;    /* 允许文本换行 */
+            max-width: 100%;        /* 限制最大宽度为容器宽度 */
+            display: block;         /* 保持块级显示 */
+            margin-bottom: 10px;    /* 下边距 */
+        }
+
 
         .status-value {
             color: #1a73e8;
             font-weight: bold;
             font-size: 14px;
+        }
+
+        .status-value1 {
+            color: #1a73e8;
+            font-size: 14px;
+            word-wrap: break-word;    /* 确保长单词换行 */
+            white-space: normal;      /* 允许文本换行 */
+            display: block;           /* 保证块级显示 */
+            padding-left: 20px;       /* 左侧内边距 */
+            padding-right: 10px;
+            max-width: 100%;          /* 保证不超出容器宽度 */
+        }
+
+
+        .status-item1 {
+            margin-bottom: 15px;
+            padding: 10px;
+            background-color: #f5f5f5;
+            border-radius: 4px;
+            width: 100%;
+            box-sizing: border-box;
         }
 
         .data-source-selector {
@@ -586,7 +617,7 @@
             appearance: none;
         }
 
-        /* 使用伪元素来创建自定义的选中效果 */
+        /* 使用伪元素建自定义的选中效果 */
         .feature-select[multiple] option:checked {
             background-color: #f0f0f0 !important;
             color: #333;
@@ -627,7 +658,7 @@
             border-radius: 5px;
             transition: background-color 0.3s ease, color 0.3s ease;
         }
-        /* 添加自定义的多选行为样式 */
+        /* 加自定义的多选行为样式 */
         .feature-select[multiple]:focus option:checked {
             background-color: #f0f0f0 !important;
             color: #333;
@@ -650,6 +681,27 @@
             height: 79vh;
             object-fit: cover;
             z-index: 0;
+        }
+        .standard-model-option {
+            margin-bottom: 20px;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .standard-model-option button {
+            margin-bottom: 10px;
+        }
+
+        .standard-model-option button.active {
+            background-color: #1a73e8;
+            color: white;
+        }
+
+        #custom-feature-selection.disabled {
+            opacity: 0.5;
+            pointer-events: none;
         }
     </style>
 </head>
@@ -728,7 +780,7 @@
                     </label>
                     <label class="option-item">
                         <input type="radio" name="data-source" value="federated">
-                        <span class="option-text">导入联邦数据</span>
+                        <span class="option-text">导入外地节点数据</span>
                         <span class="option-description">结合其他工厂的设备数据进行联合分析</span>
                     </label>
                 </div>
@@ -766,25 +818,30 @@
             <div class="section">
                 <h2>特征选择</h2>
                 <div class="feature-selection">
-                    <div class="form-group">
-                        <label>选择标签变量</label>
-                        <select id="label-feature" class="feature-select">
-                            <option value="" disabled selected>请选择标签变量</option>
-                            <!-- 选项将通过API动态加载 -->
-                        </select>
-                        <small class="form-text">选择要预测的目标变量</small>
+                    <!-- 添加标准模型选项 -->
+                    <div class="standard-model-option">
+                        <button id="standard-model-btn" class="btn-secondary">使用标准模型</button>
+                        <small class="form-text">选择标准模型将使用预设的特征组合</small>
                     </div>
-                    
-                    <!-- 修改特征选择区域的样式 -->
-                    <div class="form-group" style="margin-top: 20px;">
-                        <label>选择自变量（可多选）</label>
-                        <div class="feature-select-wrapper">
-                            <select id="independent-features" class="feature-select" multiple size="8">
-                                <option value="" disabled>请选择自变量</option>
-                                <!-- 选项将通过API动态加载 -->
+
+                    <div id="custom-feature-selection">
+                        <div class="form-group">
+                            <label>选择标签变量</label>
+                            <select id="label-feature" class="feature-select">
+                                <option value="" disabled selected>请选择标签变量</option>
                             </select>
+                            <small class="form-text">选择要预测的目标变量</small>
                         </div>
-                        <small class="form-text">点击可直接选择多个自变量</small>
+                        
+                        <div class="form-group" style="margin-top: 20px;">
+                            <label>选择自变量（可多选）</label>
+                            <div class="feature-select-wrapper">
+                                <select id="independent-features" class="feature-select" multiple size="8">
+                                    <option value="" disabled>请选择自变量</option>
+                                </select>
+                            </div>
+                            <small class="form-text">点击可直接选择多个自变量</small>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -822,8 +879,9 @@
                         <div class="config-item">
                             <h3>模型架构</h3>
                             <div class="form-group">
-                                <label>模型选择</label>
+                                <label>模型择</label>
                                 <select id="model-type">
+                                    <option value="xgboost">XGBoost</option>
                                     <option value="lstm">LSTM</option>
                                     <option value="cnn">CNN</option>
                                     <option value="mlp">MLP</option>
@@ -840,7 +898,7 @@
 
             <!-- 差分隐私设置 -->
             <div class="section">
-                <h2>差分隐私配置</h2>
+                <h2>差分隐私设置</h2>
                 <div class="privacy-settings">
                     <div class="privacy-control">
                         <h3>隐私预算(ε)</h3>
@@ -851,7 +909,7 @@
                         <h3>噪声机制</h3>
                         <select id="noise-mechanism">
                             <option value="laplace">拉普拉斯噪声</option>
-                            <option value="gaussian">高斯��声</option>
+                            <option value="gaussian">高斯噪声</option>
                         </select>
                     </div>
                     <div class="privacy-control">
@@ -893,7 +951,7 @@
             <div class="section">
                 <h2>训练历史</h2>
                 <div id="training-history">
-                    <!-- 训练史记录将在这里动态添加 -->
+                    <!-- 训练记录将在这里动态添加 -->
                 </div>
             </div>
         </div>
@@ -912,7 +970,7 @@
 
         // 修改页面加载时的初始化
         document.addEventListener('DOMContentLoaded', function() {
-            // 获取初始数据
+            // 获初始数据
             fetchHostStatus();  // 获取本地数据状态
             fetchGuestNodesCount();  // 获取外部节点数据
             
@@ -924,7 +982,7 @@
         // 修改获取本地数据状态的函数
         async function fetchHostStatus() {
             try {
-                const response = await fetch('/api/host-status');
+                const response = await fetch('/federal_learning/host-status');
                 const data = await response.json();
                 // 直接显示数值，不使用占位符
                 document.getElementById('local-node-count').textContent = `${data.node_counts}个`;
@@ -939,11 +997,21 @@
         // 修改获取外部节点数的函数
         async function fetchGuestNodesCount() {
             try {
-                const response = await fetch('/api/guest-nodes-count');
+                const response = await fetch('/federal_learning/guest-nodes-count');
                 const data = await response.json();
-                // 直接显示数值，不使用占位符
+                // 更新显示
                 document.getElementById('guest-nodes').textContent = `${data.count}个`;
                 document.getElementById('guest-data-count').textContent = `${data.data_counts}条`;
+                
+                // 更新节点数输入框的最大值
+                const nodeCountInput = document.getElementById('node-count');
+                nodeCountInput.max = data.count;
+                document.getElementById('max-nodes').textContent = data.count;
+                
+                // 如果当���值大于最大值，则调整为最大值
+                if (parseInt(nodeCountInput.value) > data.count) {
+                    nodeCountInput.value = data.count;
+                }
             } catch (error) {
                 console.error('获取外部节点数据失败:', error);
                 document.getElementById('guest-nodes').textContent = '获取失败';
@@ -959,7 +1027,7 @@
             fetchGuestNodesCount();
         }
 
-        // 监听数据源选择���化
+        // 监听数据源选择化
         document.querySelectorAll('input[name="data-source"]').forEach(radio => {
             radio.addEventListener('change', function(e) {
                 updateParameterDisplay(e.target.value);
@@ -969,7 +1037,7 @@
         // 修改获取特征列表的函数
         async function fetchFeatures() {
             try {
-                const response = await fetch('/api/features');
+                const response = await fetch('/federal_learning/features');
                 const data = await response.json();
                 const labelSelect = document.getElementById('label-feature');
                 const independentSelect = document.getElementById('independent-features');
@@ -978,24 +1046,29 @@
                 labelSelect.innerHTML = '<option value="" disabled selected>请选择标签变量</option>';
                 independentSelect.innerHTML = '<option value="" disabled>请选择自变量</option>';
                 
-                if (data.success && data.features) {
-                    // 添加特征选项
-                    data.features.forEach(feature => {
-                        // 为标签变量添加选项
-                        const labelOption = document.createElement('option');
-                        labelOption.value = feature;
-                        labelOption.textContent = feature;
-                        labelSelect.appendChild(labelOption);
-                        
-                        // 为自变量添加选项
-                        const independentOption = document.createElement('option');
-                        independentOption.value = feature;
-                        independentOption.textContent = feature;
-                        // 设置选项的属性以支持多选
-                        independentOption.setAttribute('role', 'option');
-                        independentOption.setAttribute('aria-selected', 'false');
-                        independentSelect.appendChild(independentOption);
-                    });
+                if (data.success) {
+                    // 添加标签变量选项
+                    if (data.label_features) {
+                        data.label_features.forEach(feature => {
+                            const labelOption = document.createElement('option');
+                            labelOption.value = feature;
+                            labelOption.textContent = feature;
+                            labelSelect.appendChild(labelOption);
+                        });
+                    }
+                    
+                    // 添加自变量选项
+                    if (data.features) {
+                        data.features.forEach(feature => {
+                            const independentOption = document.createElement('option');
+                            independentOption.value = feature;
+                            independentOption.textContent = feature;
+                            // 设置选项的属性以支持多选
+                            independentOption.setAttribute('role', 'option');
+                            independentOption.setAttribute('aria-selected', 'false');
+                            independentSelect.appendChild(independentOption);
+                        });
+                    }
 
                     // 添加多选支持
                     independentSelect.addEventListener('mousedown', function(e) {
@@ -1032,7 +1105,7 @@
                         this.parentNode.appendChild(statusDiv);
 
                         // 调用后端API连接FATE
-                        const response = await fetch('/api/connect_fate', {
+                        const response = await fetch('/federal_learning/connect_fate', {
                             method: 'POST',
                             headers: {
                                 'Content-Type': 'application/json',
@@ -1052,7 +1125,7 @@
                         statusDiv.textContent = '已成功连接FATE服务器';
                         statusDiv.style.color = '#00ff00';
 
-                        // 延迟一秒后显示其他配置选项
+                        // 延迟秒后显示其他配置选项
                         setTimeout(() => {
                             document.getElementById('additional-sections').style.display = 'block';
                             this.disabled = true;
@@ -1110,7 +1183,7 @@
             element.addEventListener('input', validateInputs);
         });
 
-        // 在页面加载时进行始验证
+        // 在页面加载时进行初始验证
         document.addEventListener('DOMContentLoaded', validateInputs);
 
         // 为特征选择添加验证监听
@@ -1185,38 +1258,66 @@
                 let elapsedTime = 0;
                 let progress = 0;
                 
-                // 生成随机执行时间（8-23秒）
-                const totalExecutionTime = Math.floor(Math.random() * (23 - 8 + 1)) + 8;
-                
                 // 更新初始状态
                 document.getElementById('taskId').textContent = taskId;
                 document.getElementById('elapsedTime').textContent = '0 秒';
                 document.getElementById('status').textContent = '执行中';
                 document.getElementById('training-progress').style.width = '0%';
                 
-                // 调用后端API启动联邦学习
-                fetch('/api/run_federal_learning', {
+                // 获取是否使用标准模型
+                const standardModelBtn = document.getElementById('standard-model-btn');
+                const isStandardModel = standardModelBtn.classList.contains('active');
+                
+                // 准备请求数据
+                const requestData = {
+                    taskId: taskId,
+                    isStandardModel: isStandardModel,
+                    modelType: document.getElementById('model-type').value,
+                    nodeCount: document.getElementById('node-count').value,
+                    minData: document.getElementById('min-data').value,
+                    epochs: document.getElementById('epochs').value,
+                    learningRate: document.getElementById('learning-rate').value,
+                    hiddenLayers: document.getElementById('hidden-layers').value,
+                    privacyBudget: document.getElementById('privacy-budget').value,
+                    noiseMechanism: document.getElementById('noise-mechanism').value,
+                    dataSensitivity: document.getElementById('data-sensitivity').value
+                };
+                
+                // 如果不是标准模型，添加用户选择的特征
+                if (!isStandardModel) {
+                    requestData.label = document.getElementById('label-feature').value;
+                    requestData.features = Array.from(
+                        document.getElementById('independent-features').selectedOptions
+                    ).map(option => option.value);
+                }
+                
+                // 调用后端API启动训练
+                const response = await fetch('/federal_learning/process_and_train', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
                     },
-                    body: JSON.stringify({
-                        taskId: taskId,
-                        // 可以添加其他需要的参数
-                    })
+                    body: JSON.stringify(requestData)
                 });
+
+                if (!response.ok) {
+                    const errorData = await response.json();
+                    throw new Error(errorData.message || '训练请求失败');
+                }
+
+                const result = await response.json();
                 
                 // 创建定时器，每秒更新时间和进度
                 const timer = setInterval(() => {
                     elapsedTime++;
-                    progress = (elapsedTime / totalExecutionTime) * 100; // 使用随机生成的总时间
+                    progress = (elapsedTime / 30) * 100; // 30秒完成
                     
                     // 更新显示
                     document.getElementById('elapsedTime').textContent = `${elapsedTime} 秒`;
                     document.getElementById('training-progress').style.width = `${progress}%`;
                     
                     // 检查是否完成
-                    if (elapsedTime >= totalExecutionTime) {
+                    if (elapsedTime >= 30) {
                         clearInterval(timer);
                         document.getElementById('status').textContent = '已完成';
                         document.getElementById('training-progress').style.width = '100%';
@@ -1225,8 +1326,8 @@
                         const warningResult = document.createElement('div');
                         warningResult.className = 'status-item';
                         warningResult.innerHTML = `
-                            <span class="status-label">损毁预警机器ID：</span>
-                            <span class="status-value">无</span>
+                            <span class="status-label1">损毁预警机器ID：</span>
+                            <span class="status-value1">${result.warning_devices || '无'}</span>
                         `;
                         document.getElementById('training-status').appendChild(warningResult);
                         
@@ -1236,16 +1337,25 @@
                             startTime: new Date().toLocaleString(),
                             duration: `${elapsedTime}秒`,
                             dataSource: document.querySelector('input[name="data-source"]:checked').value === 'local' ? '本地数据' : '联邦数据',
-                            modelType: document.getElementById('model-type').value,
+                            modelType: isStandardModel ? '标准模型' : document.getElementById('model-type').value,
                             status: '已完成',
-                            warningResult: '无'
+                            warningResult: result.warning_devices || '无'
                         });
                     }
                 }, 1000);
                 
             } catch (error) {
                 console.error('训练过程出错:', error);
-                document.getElementById('status').textContent = '执行出错';
+                document.getElementById('status').textContent = `执行出错: ${error.message}`;
+                // 添加��误提示到训练状态区域
+                const errorDiv = document.createElement('div');
+                errorDiv.className = 'status-item';
+                errorDiv.style.color = 'red';
+                errorDiv.innerHTML = `
+                    <span class="status-label">错误信息：</span>
+                    <span class="status-value">${error.message}</span>
+                `;
+                document.getElementById('training-status').appendChild(errorDiv);
             }
         });
 
@@ -1310,8 +1420,8 @@
                         <span class="value">${historyData.status}</span>
                     </div>
                     <div class="history-detail">
-                        <span class="label">预警结果</span>
-                        <span class="value">${historyData.warningResult}</span>
+                        <span class="status-label1">预警结果</span>
+                        <span class="status-value1">${historyData.warningResult}</span>
                     </div>
                 </div>
             `;
@@ -1320,7 +1430,7 @@
             historyContainer.insertBefore(historyItem, historyContainer.firstChild);
         }
 
-        // 添加切换下拉框显示的函数
+        // 添加切换��拉框显示的函数
         function toggleDropdown() {
             const dropdownContent = document.getElementById('independent-features');
             const arrow = document.querySelector('.dropdown-arrow');
@@ -1352,6 +1462,70 @@
                 document.querySelector('.dropdown-arrow').style.transform = '';
             }
         });
+
+        // 添加标准模型按钮的点击事件处理
+        document.getElementById('standard-model-btn').addEventListener('click', function() {
+            const customFeatureSelection = document.getElementById('custom-feature-selection');
+            const button = this;
+            
+            if (button.classList.contains('active')) {
+                // 取消选择标准模型
+                button.classList.remove('active');
+                button.textContent = '使用标准模型';
+                customFeatureSelection.classList.remove('disabled');
+            } else {
+                // 选择标准模型
+                button.classList.add('active');
+                button.textContent = '取消标准模型';
+                customFeatureSelection.classList.add('disabled');
+                
+                // 清空并禁用特征选择
+                document.getElementById('label-feature').selectedIndex = 0;
+                const independentSelect = document.getElementById('independent-features');
+                Array.from(independentSelect.options).forEach(option => {
+                    option.selected = false;
+                });
+            }
+            
+            // 触发验证
+            validateInputs();
+        });
+
+        // 修改验证函数，考虑标准模型的情况
+        function validateInputs() {
+            const standardModelBtn = document.getElementById('standard-model-btn');
+            const isStandardModel = standardModelBtn.classList.contains('active');
+            
+            if (isStandardModel) {
+                // 如果选择了标准模型，跳过特征选择的验证
+                document.getElementById('start-training').disabled = false;
+                return;
+            }
+
+            const labelFeature = document.getElementById('label-feature').value;
+            const independentFeatures = Array.from(
+                document.getElementById('independent-features').selectedOptions
+            ).map(option => option.value);
+            
+            // 获取所有必填字段
+            const nodeCount = document.getElementById('node-count').value;
+            const minData = document.getElementById('min-data').value;
+            const epochs = document.getElementById('epochs').value;
+            const learningRate = document.getElementById('learning-rate').value;
+            const modelType = document.getElementById('model-type').value;
+            const hiddenLayers = document.getElementById('hidden-layers').value;
+            const privacyBudget = document.getElementById('privacy-budget').value;
+            const noiseMechanism = document.getElementById('noise-mechanism').value;
+            const dataSensitivity = document.getElementById('data-sensitivity').value;
+
+            // 检查是否至少选择了一个自变量
+            const isValid = labelFeature && independentFeatures.length > 0 && nodeCount && minData && epochs && 
+                        learningRate && modelType && hiddenLayers && 
+                        privacyBudget && noiseMechanism && dataSensitivity;
+
+            // 启用或禁用开始训练按钮
+            document.getElementById('start-training').disabled = !isValid;
+        }
     </script>
 </body>
 </html>
