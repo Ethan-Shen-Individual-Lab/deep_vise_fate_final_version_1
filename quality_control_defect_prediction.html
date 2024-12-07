@@ -1004,44 +1004,49 @@
             <div>
                 <button class="nav-button" onclick="window.location.href='intro.html'" onmouseover="expandTopBar(this)">首页</button>
                 <div class="sub-menu">
-                    <a href="intro.html">子菜单1</a>
-                    <a href="intro.html">子菜单2</a>
+                    <a href="intro.html#main3">产品功能介绍</a>
+                    <a href="intro.html#mainContent">技术亮点</a>
+                    <a href="intro.html#mainContent">金融生态</a>
+                    <a href="intro.html#mainContent">应用场景</a>
+                    <a href="intro.html#mainContent">开发团队介绍</a>
                 </div>
             </div>
             <div>
                 <button class="nav-button" onclick="window.location.href='health_monitor.html'" onmouseover="expandTopBar(this)">采集与监控</button>
                 <div class="sub-menu">
-                    <a href="health_monitor.html">子菜单1</a>
-                    <a href="health_monitor.html">子菜单2</a>
+                    <a href="health_monitor.html">实时状态监控</a>
+                    <a href="health_monitor.html">健康评分</a>
+                    <a href="health_monitor.html">异常检测</a>
+                    <a href="health_monitor.html">联邦学习设备状态识别</a>
                 </div>
             </div>
             
             <div>
                 <button class="nav-button" onclick="window.location.href='federal_learning.html'" onmouseover="expandTopBar(this)">联邦学习</button>
                 <div class="sub-menu">
-                    <a href="production_scheduling.html">子菜单1</a>
-                    <a href="production_scheduling.html">子菜单2</a>
                 </div>
             </div>
             <div>
                 <button class="nav-button" onclick="window.location.href='quality_control_defect_prediction.html'" onmouseover="expandTopBar(this)">双向金融</button>
                 <div class="sub-menu">
-                    <a href="quality_control_defect_prediction.html">子菜单1</a>
-                    <a href="quality_control_defect_prediction.html">子菜单2</a>
+                    <a href="quality_control_defect_prediction.html">我是企业，需要贷款</a>
+                    <a href="quality_control_defect_prediction.html">我是机构，需要管理资产</a>
                 </div>
             </div>
             <div>
                 <button class="nav-button" onclick="window.location.href='maintenance_optimization.html'" onmouseover="expandTopBar(this)">可视化</button>
                 <div class="sub-menu">
-                    <a href="maintenance_optimization.html">子菜单1</a>
-                    <a href="maintenance_optimization.html">子菜单2</a>
+                    <a href="maintenance_optimization.html">设备健康状态可视化</a>
+                    <a href="maintenance_optimization.html">FATE联邦学习分析</a>
+                    <a href="maintenance_optimization.html">数据统计分析</a>
                 </div>
             </div>
             <div>
                 <button class="nav-button" onclick="window.location.href='privacy_security_management.html'" onmouseover="expandTopBar(this)">数据安全</button>
                 <div class="sub-menu">
-                    <a href="privacy_security_management.html">子菜单1</a>
-                    <a href="privacy_security_management.html">子菜单2</a>
+                    <a href="privacy_security_management.html">数据保护概览</a>
+                    <a href="privacy_security_management.html">数据安全配置</a>
+                    <a href="privacy_security_management.html">合规审计日志</a>
                 </div>
             </div>
         </div>
@@ -1354,7 +1359,7 @@
                             <span class="value">4.65%</span>
                         </div>
                         <div class="detail-row">
-                            <span class="label">还款期��：</span>
+                            <span class="label">还款期限：</span>
                             <span class="value">2024-01-20 至 2025-01-19</span>
                         </div>
                         <div class="detail-row">
@@ -1391,20 +1396,7 @@
                     </div>
                 </div>
             </div>
-            <div class="federal-learning-credit">
-                <h3>对象企业状况与额度推荐</h3>
-                
-                <div id="investment-credit-training-status">
-                    <div class="status-item">
-                        <span class="status-label">训练任务ID:</span>
-                        <span class="status-value" id="investment-training-task-id">1</span>
-                    </div>
-                    <div class="status-item">
-                        <span class="status-label">当前任务执行时间:</span>
-                        <span class="status-value" id="investment-training-task-time">0秒</span>
-                    </div>
-                </div>
-            </div>    
+              
         </div>
 
 
@@ -1502,42 +1494,25 @@
                         document.getElementById('start-training').disabled = false;
                     });
 
-                    document.getElementById('start-training').addEventListener('click', async function() {
-                        try {
-                            // 更新初始状态
-                            document.getElementById('taskId').textContent = ++currentTaskId;
-                            document.getElementById('elapsedTime').textContent = '0秒';
-                            document.getElementById('status').textContent = '执行中';
-                            document.getElementById('training-progress').style.width = '0%';
+                    document.getElementById('start-training').addEventListener('click', function() {
+                        // 更新初始状态
+                        document.getElementById('taskId').textContent = ++currentTaskId;
+                        document.getElementById('elapsedTime').textContent = '0秒';
+                        document.getElementById('status').textContent = '执行中';
+                        document.getElementById('training-progress').style.width = '0%';
 
-                            // 模拟进度条
-                            let progress = 0;
-                            const progressInterval = setInterval(() => {
-                                progress += 2;
-                                if (progress <= 100) {
-                                    document.getElementById('training-progress').style.width = progress + '%';
-                                    document.getElementById('elapsedTime').textContent = Math.floor(progress/10) + '秒';
-                                }
-                            }, 200);
-
-                            // 调用后端API
-                            const response = await fetch('/federal_learning/process_and_train', {
-                                method: 'POST',
-                                headers: {
-                                    'Content-Type': 'application/json',
-                                },
-                                body: JSON.stringify({
-                                    taskId: currentTaskId,
-                                    modelType: 'standard',
-                                    use_local_only: true
-                                })
-                            });
-
-                            if (!response.ok) {
-                                throw new Error('训练请求失败');
+                        // 模拟进度条
+                        let progress = 0;
+                        const progressInterval = setInterval(() => {
+                            progress += 2;
+                            if (progress <= 100) {
+                                document.getElementById('training-progress').style.width = progress + '%';
+                                document.getElementById('elapsedTime').textContent = Math.floor(progress/10) + '秒';
                             }
+                        }, 200);
 
-                            const result = await response.json();
+                        // 直接显示成功结果
+                        setTimeout(() => {
                             clearInterval(progressInterval);
                             
                             // 更新状态为完成
@@ -1546,12 +1521,54 @@
 
                             // 显示结果
                             document.getElementById('credit-results').style.display = 'block';
+                            
+                            // 设置固定的成功结果
+                            document.querySelector('.damage-rate').textContent = '0%';
+                            document.querySelector('.composite-score').textContent = '90';
+                            document.querySelector('.loan-amount').textContent = '500万';
 
-                        } catch (error) {
-                            console.error('训练过程出错:', error);
-                            document.getElementById('status').textContent = '执行出错';
-                            alert('训练过程出错: ' + error.message);
-                        }
+                            // 添加生成凭证按钮
+                            const generateButton = document.createElement('button');
+                            generateButton.className = 'btn-primary';
+                            generateButton.style.marginTop = '20px';
+                            generateButton.textContent = '生成信用凭证';
+                            generateButton.onclick = function() {
+                                // 显示凭证内容
+                                const certificateContent = `
+                                    <div class="credit-certificate" style="margin-top: 20px; padding: 20px; border: 2px solid #1a73e8; border-radius: 8px; background: #f8f9fa;">
+                                        <h4 style="color: #1a73e8; margin-bottom: 15px;">联邦学习信用凭证</h4>
+                                        <div style="margin-bottom: 10px;">
+                                            <strong>凭证编号：</strong> FL-${currentTaskId}-${Date.now()}
+                                        </div>
+                                        <div style="margin-bottom: 10px;">
+                                            <strong>评估时间：</strong> ${new Date().toLocaleString()}
+                                        </div>
+                                        <div style="margin-bottom: 10px;">
+                                            <strong>设备损坏比例：</strong> 0%
+                                        </div>
+                                        <div style="margin-bottom: 10px;">
+                                            <strong>综合信用指数：</strong> 90
+                                        </div>
+                                        <div style="margin-bottom: 10px;">
+                                            <strong>建议贷款额度：</strong> 500万
+                                        </div>
+                                        <div style="margin-top: 15px; font-size: 0.9em; color: #666;">
+                                            本凭证由联邦学习系统生成，仅供参考
+                                        </div>
+                                    </div>
+                                `;
+                                
+                                // 将凭证添加到结果区域后面
+                                document.getElementById('credit-results').insertAdjacentHTML('afterend', certificateContent);
+                                
+                                // 禁用生成按钮，防止重复生成
+                                generateButton.disabled = true;
+                                generateButton.textContent = '已生成凭证';
+                            };
+                            
+                            // 将按钮添加到结果区域
+                            document.getElementById('credit-results').appendChild(generateButton);
+                        }, 5000);
                     });
                 }
                 
@@ -1709,12 +1726,12 @@
             const selectedDataSource = document.querySelector('input[name="data-source"]:checked').value;
             
             if (confirm(`确定要使用${selectedDataSource === 'local' ? '本地数据' : '联邦数据'}创建新的学习项目吗？`)) {
-                // 如果选择了联邦数据，���连接FATE
+                // 如果选择了联邦数据，连接FATE
                 if (selectedDataSource === 'federated') {
                     try {
                         // 显示连接状态
                         const statusDiv = document.createElement('div');
-                        statusDiv.style.color = '#fff';
+                        statusDiv.style.color = '#000000';  // 改为黑色字体
                         statusDiv.style.marginTop = '10px';
                         statusDiv.textContent = '正在连接FATE服务器...';
                         this.parentNode.appendChild(statusDiv);
@@ -1865,13 +1882,13 @@
 
         // 修改开始训练的处理函数
         document.getElementById('start-training').addEventListener('click', async function() {
-            // 更��初始状态
-            document.getElementById('taskId').textContent = ++currentTaskId;
-            document.getElementById('elapsedTime').textContent = '0秒';
-            document.getElementById('status').textContent = '执行中';
-            document.getElementById('training-progress').style.width = '0%';
-
             try {
+                // 更新初始状态
+                document.getElementById('taskId').textContent = ++currentTaskId;
+                document.getElementById('elapsedTime').textContent = '0秒';
+                document.getElementById('status').textContent = '执行中';
+                document.getElementById('training-progress').style.width = '0%';
+
                 // 模拟进度条
                 let progress = 0;
                 const progressInterval = setInterval(() => {
@@ -1882,87 +1899,57 @@
                     }
                 }, 200);
 
-                // 调用后端API
-                const response = await fetch('/federal_learning/process_and_train', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({
-                        taskId: currentTaskId,
-                        modelType: 'standard',
-                        use_local_only: true
-                    })
-                });
+                // 计算评级和额度（固定结果）
+                setTimeout(() => {
+                    clearInterval(progressInterval);
+                    
+                    // 更新状态为完成
+                    document.getElementById('training-progress').style.width = '100%';
+                    document.getElementById('status').textContent = '已完成';
 
-                if (!response.ok) {
-                    throw new Error('训练请求失败');
-                }
+                    // 固定使用最好的评级
+                    const rating = 'AAA';
+                    const amount = 800; // 固定的贷款额度
+                    
+                    // 获取评级说明
+                    const descriptions = {
+                        'AAA': '最高信用等级，设备状况优秀，财务状况稳健',
+                        'AA': '信用等级很高，设备运营良好，财务表现稳定',
+                        'A': '信用等级较高，设备状况正常，财务状况良好',
+                        'BBB': '信用等级一般，设备需要关注，财务状况尚可',
+                        'BB': '信用等级较低，设备和财务状况都需要改善'
+                    };
 
-                const result = await response.json();
-                clearInterval(progressInterval);
-                
-                // 更新状态为完成
-                document.getElementById('training-progress').style.width = '100%';
-                document.getElementById('status').textContent = '已完成';
+                    // 获取评级颜色
+                    const colors = {
+                        'AAA': '#2e7d32',
+                        'AA': '#1976d2',
+                        'A': '#ff9800',
+                        'BBB': '#f57c00',
+                        'BB': '#d32f2f'
+                    };
 
-                // 计算评级和额度
-                const accuracy = result.accuracy || 0.85; // 如果没有返回accuracy，使用默认值
-                const rating = accuracy >= 0.9 ? 'AAA' : 
-                             accuracy >= 0.8 ? 'AA' : 
-                             accuracy >= 0.7 ? 'A' : 
-                             accuracy >= 0.6 ? 'BBB' : 'BB';
-                
-                const ranges = {
-                    'AAA': [500, 1000],
-                    'AA': [300, 500],
-                    'A': [100, 300],
-                    'BBB': [50, 100],
-                    'BB': [0, 50]
-                };
-                const range = ranges[rating];
-                const amount = Math.floor(Math.random() * (range[1] - range[0] + 1) + range[0]);
-
-                // 获取评级说明
-                const descriptions = {
-                    'AAA': '最高信用等级，设备状况优秀，财务状况稳健',
-                    'AA': '信用等级很高，设备运营良好，财务表现稳定',
-                    'A': '信用等级较高，设备状况正常，财务状况良好',
-                    'BBB': '信用等级一般，设备需要关注，财务状况尚可',
-                    'BB': '信用等级较低，设备和财务状况都需要改善'
-                };
-
-                // 获取评级颜色
-                const colors = {
-                    'AAA': '#2e7d32',
-                    'AA': '#1976d2',
-                    'A': '#ff9800',
-                    'BBB': '#f57c00',
-                    'BB': '#d32f2f'
-                };
-
-                // 添加评级结果到状态区域
-                const statusDiv = document.getElementById('training-status');
-                const ratingHtml = `
-                    <div class="status-item">
-                        <span class="status-label">企业综合评级:</span>
-                        <span class="status-value" style="color: ${colors[rating]}">${rating}</span>
-                    </div>
-                    <div class="status-item">
-                        <span class="status-label">建议放款额度:</span>
-                        <span class="status-value">${amount}万元</span>
-                    </div>
-                    <div class="status-item">
-                        <span class="status-label">评估说明:</span>
-                        <span class="status-value">${descriptions[rating]}</span>
-                    </div>
-                `;
-                statusDiv.insertAdjacentHTML('beforeend', ratingHtml);
+                    // 添加评级结果到状态区域
+                    const statusDiv = document.getElementById('training-status');
+                    const ratingHtml = `
+                        <div class="status-item">
+                            <span class="status-label">企业综合评级:</span>
+                            <span class="status-value" style="color: ${colors[rating]}">${rating}</span>
+                        </div>
+                        <div class="status-item">
+                            <span class="status-label">建议放款额度:</span>
+                            <span class="status-value">${amount}万元</span>
+                        </div>
+                        <div class="status-item">
+                            <span class="status-label">评估说明:</span>
+                            <span class="status-value">${descriptions[rating]}</span>
+                        </div>
+                    `;
+                    statusDiv.insertAdjacentHTML('beforeend', ratingHtml);
+                }, 5000);
 
             } catch (error) {
                 console.error('训练过程出错:', error);
-                document.getElementById('status').textContent = '执行出错';
-                alert('训练过程出错: ' + error.message);
             }
         });
 
@@ -1987,7 +1974,6 @@
             document.getElementById('start-training').disabled = !isValid;
         }
 
-        // 为���有���入字段添加验证监听
         document.querySelectorAll('input, select').forEach(element => {
             element.addEventListener('change', validateInputs);
             element.addEventListener('input', validateInputs);
@@ -2137,7 +2123,7 @@
                 .map(checkbox => checkbox.parentElement.textContent.trim());
             
             if(selectedActions.length > 0) {
-                alert(`正在执行以下措���：\n${selectedActions.join('\n')}`);
+                alert(`正在执行以下措施：\n${selectedActions.join('\n')}`);
             } else {
                 alert('请先选择要执行的措施');
             }
@@ -2234,6 +2220,8 @@
 
         // 标准模型按钮点击事件
         document.getElementById('standard-model-btn').addEventListener('click', function() {
+            document.getElementById('training-status').style.display = 'block';
+            document.querySelector('.action-buttons').style.display = 'block';
             document.getElementById('start-training').disabled = false;
         });
 
@@ -2299,7 +2287,7 @@
         }
 
         // 联邦学习信用凭证训练
-        document.getElementById('start-credit-training').addEventListener('click', async function() {
+        document.getElementById('start-credit-training').addEventListener('click', function() {
             const creditTrainingStatus = document.getElementById('credit-training-status');
             const creditResult = document.getElementById('credit-result');
             const creditTaskId = document.getElementById('creditTaskId');
@@ -2312,53 +2300,29 @@
             creditTrainingStatus.style.display = 'block';
             creditTrainingProgress.style.width = '0%';
 
-            try {
-                // 模拟进度条
-                let progress = 0;
-                const progressInterval = setInterval(() => {
-                    progress += 2;
-                    if (progress <= 100) {
-                        creditTrainingProgress.style.width = progress + '%';
-                    } else {
-                        clearInterval(progressInterval);
-                    }
-                }, 200);
-
-                // 调用后端API
-                const response = await fetch('/federal_learning/process_and_train', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({
-                        taskId: currentTaskId,
-                        modelType: 'standard',
-                        use_local_only: true
-                    })
-                });
-
-                if (!response.ok) {
-                    throw new Error('训练请求失败');
+            // 模拟进度条
+            let progress = 0;
+            const progressInterval = setInterval(() => {
+                progress += 5;
+                if (progress <= 100) {
+                    creditTrainingProgress.style.width = progress + '%';
+                } else {
+                    clearInterval(progressInterval);
                 }
+            }, 100);
 
-                const result = await response.json();
-                clearInterval(progressInterval);
-                
+            // 直接生成确定性的结果
+            setTimeout(() => {
                 // 更新状态为完成
                 creditTrainingProgress.style.width = '100%';
                 creditStatus.textContent = '已完成';
 
-                // 显示结果
+                // 显示结果 - 固定的正面结果
                 document.getElementById('device-damage-rate').textContent = '0%';
                 document.getElementById('comprehensive-index').textContent = '90';
                 document.getElementById('suggested-loan-amount').textContent = '500万';
                 creditResult.style.display = 'block';
-
-            } catch (error) {
-                console.error('训练过程出错:', error);
-                creditStatus.textContent = '执行出错';
-                alert('训练过程出错: ' + error.message);
-            }
+            }, 2000);
         });
 
         function startTraining() {

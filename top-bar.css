@@ -20,7 +20,7 @@
     transition: height 0.2s ease, background-color 0.2s ease;
 }
 .top-bar.expanded {
-    height: 170px;
+    height: 220px;
     background-color: rgba(255, 255, 255, 0.8);
 }
 .sub-menu {
