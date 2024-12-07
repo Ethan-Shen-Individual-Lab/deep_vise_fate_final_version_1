@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 # deep-vise-fate-final
 =======
 # DeepVise-Fate2
@@ -28,3 +29,6 @@
 
 
 >>>>>>> 124cd70 (Initial commit)
+=======
+# deep_vise_fate_final_version
+>>>>>>> b0cc99308cc691cc882355e4cd7be7b8c6b9776e
