@@ -520,6 +520,23 @@ def federated_learning_status():
     
     return Response(generate(), mimetype='text/event-stream')
 
+#可选fate模型线上训练
+def heteroxgboost:
+    reader = Reader()
+    train_data = reader.read(data_path)
+    
+    # 2. 使用 FATE 的 XGBoost 模型
+    model = HeteroXGBoost()
+    
+    # 3. 配置 pipeline，添加步骤
+    pipeline = Pipeline()
+    pipeline.add_component(reader, name='reader', input_data=train_data)
+    pipeline.add_component(model, name='hetero_xgb')
+    
+    # 4. 运行 pipeline
+    pipeline.fit()
+    
+
 @app.route('/federal_learning/host-status', methods=['GET'])
 def host_status():
     try:
