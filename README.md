@@ -4,6 +4,7 @@
 ### 外网访问：[https://deep-vise-fate-final-version-1.vercel.app/]
 ### 中国大陆内网访问：[www.deepvise.online] （不知道什么时候会被断掉）
 ### 使用外网以及电脑将会更加流畅，因为我们的系统设计更加符合电脑页面框架。另外手机点入无法播放视频。
+### What can I say: 变得更专业；storyline不要太超前，能有真的数据集实现最好。
 ---------------------------------------------------------------------
 ### 1. This is the front-end system designed for the Shenzhen International Financial Technology Competition. We made it to the top 10, but with zero prize money (sigh~).
 ### Please do not use our photos or personal information.
