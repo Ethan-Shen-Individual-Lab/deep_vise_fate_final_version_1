@@ -4,9 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LLM Chat</title>
-    <link rel="stylesheet" href="styles.css"> <!-- 引入样式 -->
+    <link rel="stylesheet" href="styles.css">
     <style>
-        /* 简单的样式设计 */
         body {
             font-family: Arial, sans-serif;
             background-color: #f4f4f4;
@@ -43,7 +42,7 @@
             z-index: 24;
         }
         .logo img {
-            width: 100px; /* 调整图标大小 */
+            width: 100px; 
             height: auto;
         }
     </style>
@@ -54,17 +53,16 @@
 <a href="index.html" class="return-link">返回</a>
 <body>
     <h1>点击右下角使用智能管家</h1>
-    <div id="chat-container"></div> <!-- 聊天容器 -->
-
-    <script src="https://lf-cdn.coze.cn/obj/unpkg/flow-platform/chat-app-sdk/1.0.0-beta.4/libs/cn/index.js"></script>
+    <div id="chat-container"></div> 
+    <script src="???"></script>
     <script>
         new CozeWebSDK.WebChatClient({
           config: {
-            bot_id: '7440138179946283035',
+            bot_id: '???',
           },
           componentProps: {
             title: 'Coze',
-            container: document.getElementById('chat-container'), // 指定聊天容器
+            container: document.getElementById('chat-container'), 
           },
         });
     </script>
