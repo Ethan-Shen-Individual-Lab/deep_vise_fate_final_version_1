@@ -1,4 +1,4 @@
-# DeepVise-Fate2
+# DeepVise-Fate
 ### 一. 这是为深圳国际金融科技大赛设计的系统(前端)。最后喜提十强，0元奖金（sigh~）。
 ### 请不要用我们的照片和个人信息！
 ### 外网访问：[https://deep-vise-fate-final-version-1.vercel.app/]
